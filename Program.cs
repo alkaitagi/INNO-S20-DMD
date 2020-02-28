@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Linq;
 using System.Collections.Generic;
 using Npgsql;
@@ -9,6 +10,17 @@ namespace INNO_S20_DMD_1
 {
     class Program
     {
+        static void PopulatePSQL()
+        {
+            Console.WriteLine("Populating Postgres...");
+            System.Diagnostics.Process.Start
+            (
+                "CMD.exe",
+                "psql -U postgres -h localhost -p 5432 -d dvdrental -f"
+                + "assignment\\postgree\\restore.sql"
+            );
+        }
+
         static IEnumerable<(NpgsqlDataReader table, string name)> GetPSQLTables()
         {
             static IEnumerable<string> GetTableNames(NpgsqlConnection psql)
@@ -49,14 +61,22 @@ namespace INNO_S20_DMD_1
             psql.Close();
         }
 
-        static void Main()
+        static IMongoDatabase ConnectToMGDB()
         {
+            Console.WriteLine("Dropping MGDB...");
             var mongoHost = new MongoClient("mongodb://localhost:27017");
             mongoHost.DropDatabase("dvdrental");
-            var mongo = mongoHost.GetDatabase("dvdrental");
+            return mongoHost.GetDatabase("dvdrental");
+        }
+
+        static void Main()
+        {
+            PopulatePSQL();
+            var mongo = ConnectToMGDB();
 
             foreach (var (table, name) in GetPSQLTables())
             {
+                Console.WriteLine($"Moving {name}...");
                 var columns = table.GetColumnSchema().Select(c => c.ColumnName).ToArray();
                 var rows = new List<BsonDocument>();
 

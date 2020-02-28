@@ -1,8 +1,9 @@
 --
 -- NOTE:
 --
--- File paths need to be edited. Search for C:\Users\jonat\Dropbox\#Innopolis\Courses\Data Modeling and Databases II\lab\postgree and
--- replace it with the path to the directory containing
+-- File paths need to be edited.
+-- Search for "C:\Users\alkaitagi\Projects\INNO-S20-DMD\assignment\postgree\"
+-- and replace it with the path to the directory containing
 -- the extracted data files.
 --
 --
