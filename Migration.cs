@@ -61,7 +61,7 @@ namespace INNO_S20_DMD_1
             psql.Close();
         }
 
-        private static IMongoDatabase ConnectToMGDB()
+        public static IMongoDatabase ConnectToMGDB()
         {
             Console.WriteLine("Dropping MGDB...");
             var mongoHost = new MongoClient("mongodb://localhost:27017");

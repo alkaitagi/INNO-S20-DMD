@@ -4,9 +4,10 @@ namespace INNO_S20_DMD_1
 {
     class Program
     {
-        static void Main()
+        static void Main(string[] args)
         {
-            Migration.Start();
+            if (args.Length == 1 && args[0] == "-m")
+                Migration.Start();
         }
     }
 }

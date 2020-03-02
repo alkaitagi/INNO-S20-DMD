@@ -10,6 +10,6 @@ namespace INNO_S20_DMD_1.Queries
 {
     public class Query1
     {
-
+        
     }
 }
