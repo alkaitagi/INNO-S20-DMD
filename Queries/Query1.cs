@@ -1,7 +1,6 @@
 using MongoDB.Bson;
 using MongoDB.Driver;
 using System;
-using System.Threading.Tasks;
 
 namespace INNO_S20_DMD_1
 {
@@ -68,9 +67,26 @@ namespace INNO_S20_DMD_1
                                         )
                                 )
                         )),
+                new BsonDocument("$group", new BsonDocument()
+                        .Add("_id", new BsonDocument()
+                                .Add("customer\u1390customer_id", "$customer.customer_id")
+                                .Add("film_category\u1390category_id", "$film_category.category_id")
+                        )
+                        .Add("COUNT(film_category\u1390category_id)", new BsonDocument()
+                                .Add("$sum", 1)
+                        )),
                 new BsonDocument("$project", new BsonDocument()
-                        .Add("customer.first_name", "$customer.first_name")
-                        .Add("_id", 0))
+                        .Add("customer.customer_id", "$_id.customer\u1390customer_id")
+                        .Add("COUNT(film_category.category_id)", "$COUNT(film_category\u1390category_id)")
+                        .Add("_id", 0)),
+                new BsonDocument("$match", new BsonDocument()
+                        .Add("COUNT(film_category.category_id)", new BsonDocument()
+                                .Add("$gt", new BsonInt64(1L))
+                        )),
+                new BsonDocument("$project", new BsonDocument()
+                        .Add("_id", 0)
+                        .Add("customer.customer_id", "$customer.customer_id")
+                        .Add("COUNT(film_category\u1390category_id)", "$COUNT(film_category.category_id)"))
             };
 
             using var cursor = collection.Aggregate(pipeline, options);
