@@ -43,6 +43,12 @@ pipeline = [
             u"actor2": u"$_id.actor2",
             u"films": u"$films"
         }
+    },
+    {
+        u"$sort": {
+            "actor1": 1,
+            "actor2": 1
+        }
     }
 ]
 
@@ -50,6 +56,7 @@ cursor = collection.aggregate(
     pipeline,
     allowDiskUse=True
 )
+
 try:
     for doc in cursor:
         print(doc)
