@@ -1,3 +1,4 @@
+from pathlib import Path
 from pymongo import MongoClient
 import csv
 
@@ -61,6 +62,7 @@ for doc in cursor:
 client.close()
 
 
+Path("results").mkdir(exist_ok=True)
 with open("results/2.csv", "w") as file:
     sheet = csv.writer(file, lineterminator='\n')
 

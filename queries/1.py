@@ -1,5 +1,6 @@
-from pymongo import MongoClient
 from datetime import datetime
+from pathlib import Path
+from pymongo import MongoClient
 import csv
 
 client = MongoClient("localhost", 27017)
@@ -120,6 +121,7 @@ for doc in cursor:
     records.append(doc)
 client.close()
 
+Path("results").mkdir(exist_ok=True)
 with open("results/1.csv", "w") as file:
     csv.writer(file, lineterminator='\n').writerows(
         [f'{r["first_name"]} {r["last_name"]}'] for r in records)
