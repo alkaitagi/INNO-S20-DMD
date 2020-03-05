@@ -52,12 +52,11 @@ namespace INNO_S20_DMD_1
             psql.Open();
 
             foreach (var name in GetTableNames(psql))
-                yield return
-                (
-                    new NpgsqlCommand($"SELECT * FROM {name}", psql).ExecuteReader(),
-                    name
-                );
-
+            {
+                var table = new NpgsqlCommand($"SELECT * FROM {name}", psql).ExecuteReader();
+                yield return (table, name);
+                table.Close();
+            }
             psql.Close();
         }
 
@@ -94,7 +93,6 @@ namespace INNO_S20_DMD_1
                     rows.Add(item);
                 }
 
-                table.Close();
                 mongo.GetCollection<BsonDocument>(name).InsertMany(rows);
             }
             Console.WriteLine("Migration has finished\n");

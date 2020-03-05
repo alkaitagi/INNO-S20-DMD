@@ -119,7 +119,8 @@ cursor = collection.aggregate(
 )
 print("Rented more than 2 categories of movies:")
 try:
-    for doc in cursor:
-        print(doc["customer"]["first_name"], doc["customer"]["last_name"])
+    with open('results/1.txt', 'w') as file:
+        for doc in cursor:
+            file.write(doc["customer"]["first_name"] + " " + doc["customer"]["last_name"] + "\n")
 finally:
     client.close()

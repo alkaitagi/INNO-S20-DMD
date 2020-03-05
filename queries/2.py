@@ -1,4 +1,5 @@
 from pymongo import MongoClient
+from prettytable import PrettyTable
 
 client = MongoClient("localhost", 27017)
 database = client["dvdrental"]
