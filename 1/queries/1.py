@@ -121,7 +121,7 @@ for doc in cursor:
     records.append(doc)
 client.close()
 
-Path("results").mkdir(exist_ok=True)
-with open("results/1.csv", "w") as file:
+Path("1/results").mkdir(exist_ok=True)
+with open("1/results/1.csv", "w") as file:
     csv.writer(file, lineterminator='\n').writerows(
         [f'{r["first_name"]} {r["last_name"]}'] for r in records)

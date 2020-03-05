@@ -62,8 +62,8 @@ for doc in cursor:
 client.close()
 
 
-Path("results").mkdir(exist_ok=True)
-with open("results/2.csv", "w") as file:
+Path("1/results").mkdir(exist_ok=True)
+with open("1/results/2.csv", "w") as file:
     sheet = csv.writer(file, lineterminator='\n')
 
     max_id = max(r["actor1"] for r in records)
