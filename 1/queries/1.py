@@ -3,10 +3,11 @@ from pathlib import Path
 from pymongo import MongoClient
 import csv
 
-client = MongoClient("localhost", 27017)
-collection = client["dvdrental"]["customer"]
 
-cursor = collection.aggregate(
+client = MongoClient("localhost", 27017)
+
+
+cursor = client["dvdrental"]["customer"].aggregate(
     [
         {
             u"$project": {
@@ -115,13 +116,15 @@ cursor = collection.aggregate(
     ],
     allowDiskUse=True
 )
-
 records = []
 for doc in cursor:
     records.append(doc)
-client.close()
 
+
+client.close()
 Path("1/results").mkdir(exist_ok=True)
+
+
 with open("1/results/1.csv", "w") as file:
     csv.writer(file, lineterminator='\n').writerows(
         [f'{r["first_name"]} {r["last_name"]}'] for r in records)
