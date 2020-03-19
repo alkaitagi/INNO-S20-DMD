@@ -2,7 +2,7 @@ from datetime import datetime
 from pathlib import Path
 from pymongo import MongoClient
 import csv
-
+import os
 
 client = MongoClient("localhost", 27017)
 
@@ -122,9 +122,11 @@ for doc in cursor:
 
 
 client.close()
-Path("1/results").mkdir(exist_ok=True)
+curdir = os.path.dirname(os.path.dirname(
+    os.path.abspath(__file__))) + "\\results"
+Path(curdir).mkdir(exist_ok=True)
 
 
-with open("1/results/1.csv", "w") as file:
+with open(curdir + "\\1.csv", "w") as file:
     csv.writer(file, lineterminator='\n').writerows(
         [f'{r["first_name"]} {r["last_name"]}'] for r in records)

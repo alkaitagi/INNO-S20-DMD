@@ -1,6 +1,7 @@
 from pathlib import Path
 from pymongo import MongoClient
 import csv
+import os
 
 
 client = MongoClient("localhost", 27017)
@@ -68,10 +69,12 @@ for doc in cursor:
 
 
 client.close()
-Path("1/results").mkdir(exist_ok=True)
+curdir = os.path.dirname(os.path.dirname(
+    os.path.abspath(__file__))) + "\\results"
+Path(curdir).mkdir(exist_ok=True)
 
 
-with open("1/results/2.csv", "w") as file:
+with open(curdir + "\\2.csv", "w") as file:
     sheet = csv.writer(file, lineterminator='\n')
 
     max_id = max(r["actor1"] for r in records)

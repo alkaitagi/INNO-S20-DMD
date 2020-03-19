@@ -1,5 +1,6 @@
 from pathlib import Path
 from pymongo import MongoClient
+import os
 import csv
 
 
@@ -135,10 +136,12 @@ for rental in cursor:
 
 
 client.close()
-Path("1/results").mkdir(exist_ok=True)
+curdir = os.path.dirname(os.path.dirname(
+    os.path.abspath(__file__))) + "\\results"
+Path(curdir).mkdir(exist_ok=True)
 
 
-with open("1/results/3.csv", "w") as file:
+with open(curdir + "\\3.csv", "w") as file:
     sheet = csv.writer(file, lineterminator='\n')
     sheet.writerow(["film", "category", "times rented"])
 
