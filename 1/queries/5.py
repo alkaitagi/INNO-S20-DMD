@@ -14,12 +14,6 @@ for doc in cursor:
     actors[doc["actor_id"]] = f"{doc['first_name']} {doc['last_name']}"
 
 
-target = int(input("Target actor id: "))
-if target not in actors:
-    print("No such actor")
-    exit()
-
-
 cursor = client["dvdrental"]["film_actor"].aggregate(
     [
         {
@@ -89,6 +83,7 @@ def search(current, steps):
 
 with open(curdir + "\\5.csv", "w") as file:
     sheet = csv.writer(file, lineterminator='\n')
+    target = 1
     search(target, 0)
     distance.pop(target, None)
 
