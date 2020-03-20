@@ -17,7 +17,7 @@ Moreover, the queries that were previously executed on the original platform sho
 2. Create a report that shows a table actor (rows) vs actor (columns) with the number of movies the actors co-starred.
 3. A report that lists all films, their film category and the number of times it has been rented by a customer.
 4. A report that, given a certain customer (parameter) and his/her historical data on rented movies, recommends other movies. Such a recommendation should be based on customers that watched similar sets of movies. Create a metric (any) to assess to which degree a movie is a good recommendation.
-5. You probably have heard of the “Bacon’s Law” (see link). Create a report that shows the degrees of separation between a certain actor (choose one, this should be fixed) and any other actor.
+5. You probably have heard of the “Bacon’s Law”. Create a report that shows the degrees of separation between a certain actor (choose one, this should be fixed) and any other actor.
 
 The queries and reports and the general appearance of the output will be considered in the grade.
 
