@@ -87,34 +87,11 @@ def search(current, steps):
             search(next, steps + 1)
 
 
-search(target, 0)
-for visited, distance in distance.items():
-    print(f"{visited} - {actors[visited]}: {distance}")
+with open(curdir + "\\5.csv", "w") as file:
+    sheet = csv.writer(file, lineterminator='\n')
+    search(target, 0)
+    distance.pop(target, None)
 
-# with open(curdir + "\\5.csv", "w") as file:
-#     sheet = csv.writer(file, lineterminator='\n')
-
-#     max_id = max(r["actor1"] for r in records)
-#     id1, id2 = 0, max_id + 1
-#     row = ["ID"] + list(actors[id] for id in range(1, max_id + 1))
-#     for r in records:
-#         if r["actor1"] != id1:
-#             if id2 <= max_id:
-#                 row += [0] * (max_id - id2 + 1)
-#             sheet.writerow(row)
-
-#             id1 += 1
-#             id2 = 1
-#             row = [actors[id1]]
-
-#         if r["actor2"] != id2:
-#             row += [0] * (r["actor2"] - id2)
-#             id2 = r["actor2"]
-
-#         row.append(r["films"])
-#         id2 += 1
-
-#     if len(row) > 1:
-#         if id2 <= max_id:
-#             row += [0] * (max_id - id2 + 1)
-#         sheet.writerow(row)
+    sheet.writerow([f"Distance from {actors[target]} to"])
+    for visited, distance in distance.items():
+        sheet.writerow([actors[visited], distance])
