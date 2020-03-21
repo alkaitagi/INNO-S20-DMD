@@ -105,7 +105,7 @@ for rental in rentals:
     id = rental["customer_id"]
     if id not in customers:
         customers[id] = {
-            "name": rental["first_name"] + rental["last_name"],
+            "name": rental["first_name"] + " " + rental["last_name"],
             "films": {}
         }
 
