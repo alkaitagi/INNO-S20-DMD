@@ -13,10 +13,6 @@ queries = [
 ]
 
 
-def add_inex(name, table, columns):
-    return f"CREATE INDEX {name} ON {table} ({','.join(columns)});"
-
-
 for q, query in enumerate(queries):
     indexes = {}
 
