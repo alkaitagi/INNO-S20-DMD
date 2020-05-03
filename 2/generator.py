@@ -27,5 +27,5 @@ for q, query in enumerate(queries):
         print(index)
 
     print()
-    [print("DROP INDEX " + name) for name in indexes]
+    [print(f"DROP INDEX {name};") for name in indexes]
     print("----------")
