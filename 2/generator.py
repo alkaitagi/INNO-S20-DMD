@@ -27,10 +27,16 @@ for q, query in enumerate(queries):
 
     for table, columns in query.items():
         for i in range(1, len(columns) + 1):
-            for combination in itertools.combinations(columns, i):
-                name = f"query_{q}_{len(indexes)}"
-                indexes[name] = \
-                    f"CREATE INDEX {name} ON {table} ({', '.join(combination)});"
+            for permutation in itertools.permutations(columns, i):
+                l = len(indexes)
+                name = f"query_{q}_"
+
+                indexes[name + str(l)] = \
+                    f"CREATE INDEX {name} ON {table} ({', '.join(permutation)});"
+                    
+                if len(permutation) == 1:
+                    indexes[name + str(l + 1)] = \
+                        f"CREATE INDEX {name} ON {table} USING hash ({', '.join(permutation)});"
 
     for name, index in indexes.items():
         print(index)
