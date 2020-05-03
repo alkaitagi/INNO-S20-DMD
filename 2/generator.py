@@ -23,11 +23,12 @@ for q, query in enumerate(queries):
     for table, columns in query.items():
         for i in range(1, len(columns) + 1):
             for combination in itertools.combinations(columns, i):
-                indexes[f"query_{q}_{len(indexes)}"] = \
-                    table + f" ({', '.join(combination)});"
+                name = f"query_{q}_{len(indexes)}"
+                indexes[name] = \
+                    f"CREATE INDEX {name} ON {table} ({', '.join(combination)});"
 
     for name, index in indexes.items():
-        print(f"CREATE INDEX {name} ON {index}")
+        print(index)
 
     print()
     [print("DROP INDEX " + name) for name in indexes]
