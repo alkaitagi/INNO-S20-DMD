@@ -29,14 +29,14 @@ for q, query in enumerate(queries):
         for i in range(1, len(columns) + 1):
             for permutation in itertools.permutations(columns, i):
                 l = len(indexes)
-                name = f"query_{q}_"
+                n = f"query_{q}_"
 
-                indexes[name + str(l)] = \
-                    f"CREATE INDEX {name} ON {table} ({', '.join(permutation)});"
-                    
+                indexes[n + str(l)] = \
+                    f"CREATE INDEX {n + str(l)} ON {table} ({', '.join(permutation)});"
+
                 if len(permutation) == 1:
-                    indexes[name + str(l + 1)] = \
-                        f"CREATE INDEX {name} ON {table} USING hash ({', '.join(permutation)});"
+                    indexes[n + str(l + 1)] = \
+                        f"CREATE INDEX {n + str(l + 1)} ON {table} USING hash ({', '.join(permutation)});"
 
     for name, index in indexes.items():
         print(index)
