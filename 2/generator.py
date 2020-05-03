@@ -9,6 +9,15 @@ queries = [
     },
     {
         "film": ["title", "release_year", "rental_rate"]
+    },
+    {
+        "film": ["title", "release_year", "film_id", "rating"],
+        "customer": ["customer_id", "first_name"],
+        "rental": ["rental_id", "inventory_id", "customer_id"],
+        "inventory": ["inventory_id", "film_id"],
+        "payment": ["rental_id"],
+        "film_actor": ["film_id", "actor_id"],
+        "actor": ["actor_id", "first_name"]
     }
 ]
 
