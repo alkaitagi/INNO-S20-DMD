@@ -28,7 +28,7 @@ for q, query in enumerate(queries):
     for table, columns in query.items():
         for i in range(1, len(columns) + 1):
             for combination in itertools.combinations(columns, i):
-                name = f"query_{q}_{len(indexes)}"
+                name = f"query_{q}_{len(indexes) // 2}"
                 indexes[name + "_b"] = \
                     f"CREATE INDEX {name}_b ON {table} ({', '.join(combination)});"
                 indexes[name + "_h"] = \
